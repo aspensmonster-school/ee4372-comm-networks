@@ -239,6 +239,7 @@ every connection is local (10.\*.\*.\*.), you won't ever see anything.
 that are speaking over port 80.
 
 
+
     $ netstat -pnt | grep ":80"
     (Not all processes could be identified, non-owned process info
      will not be shown, you would have to be root to see it all.)
@@ -268,6 +269,7 @@ Options:
 established yet.
   * grep -v "-" : Filters out results that are not associated with a PID or 
 process name.
+
 
 
     $ netstat -plnt | grep -v "-"
