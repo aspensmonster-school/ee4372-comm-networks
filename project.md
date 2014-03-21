@@ -13,6 +13,7 @@ ping
   * -D : Mark each ping with a timestamp in form of unixtime + microseconds.
   * -i $someNum : Delay $someNum seconds between each ping.
 
+`ping` command example:
 
     $ ping -D -i 5 synergy.txstate.edu
     [1395407774.856520] 64 bytes from excharray.txstate.edu (147.26.57.35): icmp_seq=1 ttl=61 time=2.46 ms
@@ -50,7 +51,7 @@ a response from a node along the path. The default is three, but this
 typically is too low a number.
   * -T : Use TCP SYN packets as opposed to ICMP ECHO packets for probes.
 
-ICMP ECHO probing:
+`traceroute` with ICMP ECHO probing:
 
     $ traceroute -m 60 -N 1 -q 2 synergy.txstate.edu
     traceroute to synergy.txstate.edu (147.26.57.35), 60 hops max, 60 byte packets
@@ -64,7 +65,7 @@ ICMP ECHO probing:
      2  147.26.251.6 (147.26.251.6)  8.676 ms  5.613 ms  2.984 ms  5.783 ms  7.539 ms
      3  bobcatmail.txstate.edu (147.26.57.35)  3.730 ms  1.223 ms *  4.647 ms  1.088 ms
 
-TCP SYN probing:
+`traceroute` with TCP SYN probing:
 
     # traceroute -m 60 -T -N 1 -q 5 synergy.txstate.edu
     traceroute to synergy.txstate.edu (147.26.57.35), 60 hops max, 60 byte packets
@@ -238,7 +239,7 @@ every connection is local (10.\*.\*.\*.), you won't ever see anything.
   * grep ":80" : This filters the list that netstat spits out for connections
 that are speaking over port 80.
 
-
+`netstat` example:
 
     $ netstat -pnt | grep ":80"
     (Not all processes could be identified, non-owned process info
@@ -270,7 +271,7 @@ established yet.
   * grep -v "-" : Filters out results that are not associated with a PID or 
 process name.
 
-
+`netstat` example:
 
     $ netstat -plnt | grep -v "-"
     (Not all processes could be identified, non-owned process info
