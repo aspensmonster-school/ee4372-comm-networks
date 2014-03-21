@@ -8,6 +8,12 @@ The project is to give examples of using each of the following utilities:
 ping
 ====
 
+`ping` option details:
+
+  * -D : Mark each ping with a timestamp in form of unixtime + microseconds.
+  * -i $someNum : Delay $someNum seconds between each ping.
+
+
     $ ping -D -i 5 synergy.txstate.edu
     [1395407774.856520] 64 bytes from excharray.txstate.edu (147.26.57.35): icmp_seq=1 ttl=61 time=2.46 ms
     [1395407779.854714] 64 bytes from excharray.txstate.edu (147.26.57.35): icmp_seq=2 ttl=61 time=1.94 ms
@@ -19,11 +25,6 @@ ping
     5 packets transmitted, 5 received, 0% packet loss, time 20015ms
     rtt min/avg/max/mdev = 1.940/3.327/4.849/1.045 ms
 
-As per the manpage, the details of the following flags are given:
-
-  * -D : Mark each ping with a timestamp in form of unixtime + microseconds.
-  * -i $someNum : Delay $someNum seconds between each ping.
-
 As one can see here, pinging txstate's mailserver --synergy.txstate.edu-- 
 shows that it is responding to queries. This is a good indication that the host 
 is at least visible to the network. The timestamps between each ping also 
@@ -31,6 +32,23 @@ match the 5 second delay requested.
 
 traceroute
 ==========
+
+`traceroute` option details:
+
+  * -m $someNum : $someNum specifies the maximum number of hops (max ttl value)
+    that traceroute will probe. Default is 30, we chose 60 for the hell of 
+it. 
+  * -N $someNum : This option specifies the number of concurrent probe requests
+    for traceroute to use. By default it is 16. However, nearly all network
+hardware places ICMP traffic inthe absolute lowest priority and throttles it to
+hell. So, we only go on at a time to try and avoid losing responses from nodes
+along the path. This, combined with the default delay of 5 seconds between
+queries, does a decent job of addressing the throttling issue, but isn't enough
+on its own. Which is where the next option comes in.
+  * -q $someNum : This option specifies the number of times to attempt to get 
+a response from a node along the path. The default is three, but this 
+typically is too low a number.
+  * -T : Use TCP SYN packets as opposed to ICMP ECHO packets for probes.
 
 ICMP ECHO probing:
 
@@ -70,22 +88,6 @@ TCP SYN probing:
      3  jck-slb3-ve57.tr.txstate.edu (147.26.57.100)  1.225 ms  1.948 ms  1.236 ms  1.337 ms  1.255 ms
      4  excharray.txstate.edu (147.26.57.35)  1.215 ms  1.184 ms  2.022 ms  3.500 ms  2.380 ms
 
-Option details:
-
-  * -m $someNum : $someNum specifies the maximum number of hops (max ttl value)
-    that traceroute will probe. Default is 30, we chose 60 for the hell of 
-it. 
-  * -N $someNum : This option specifies the number of concurrent probe requests
-    for traceroute to use. By default it is 16. However, nearly all network
-hardware places ICMP traffic inthe absolute lowest priority and throttles it to
-hell. So, we only go on at a time to try and avoid losing responses from nodes
-along the path. This, combined with the default delay of 5 seconds between
-queries, does a decent job of addressing the throttling issue, but isn't enough
-on its own. Which is where the next option comes in.
-  * -q $someNum : This option specifies the number of times to attempt to get 
-a response from a node along the path. The default is three, but this 
-typically is too low a number.
-  * -T : Use TCP SYN packets as opposed to ICMP ECHO packets for probes.
 
 Observe how, on our first run, we were unable to identify the IP address of the
 first hop when using two queries with ICMP ECHO probing. However, upon using
@@ -124,6 +126,8 @@ Notice that TCP SYN probing shows a third hop through another host. As well,
 the IP address-host resolution seems conflicting. On one run, the server is 
 called bobcatmail.tyxstate.edu while on another, it is called 
 synergy.txstate.edu. And yet on a third, it is called excharray.txstate.edu.
+
+## Sidenote:
 
 The inconsistiency across runs with the traceroute tool can be mitigated by 
 utilizing a tool called "mtr" that combines the capabilities of traceroute and 
