@@ -159,6 +159,16 @@ X.X.X.253, X.X.X.254) as a matter of convention.
 Also notice that `mtr` seems to regard the final hop with TCP SYN probing as 
 bobcatmail.txstate.edu.
 
+And since the differing hostnames were bothering me, here's `dig`'s report on 
+the IP address:
+
+    $ dig -x 147.26.57.35 +short
+    excharray.txstate.edu.
+    bobcatmail.txstate.edu.
+    synergy.txstate.edu.
+
+Ok, so it does look like all three hosts are bound to that same IP.
+
 ifconfig
 ========
 
@@ -172,3 +182,5 @@ netstat
 netstat is sort of like a swiss army knife of network statistics. It can 
 show connections, routing tables, interface statistics, and perform all sorts 
 of other fun networking tasks, like figuring out multicast memberships.
+
+
