@@ -127,7 +127,7 @@ the IP address-host resolution seems conflicting. On one run, the server is
 called bobcatmail.tyxstate.edu while on another, it is called 
 synergy.txstate.edu. And yet on a third, it is called excharray.txstate.edu.
 
-## Sidenote:
+### Sidenote:
 
 The inconsistiency across runs with the traceroute tool can be mitigated by 
 utilizing a tool called "mtr" that combines the capabilities of traceroute and 
@@ -180,11 +180,123 @@ ifconfig
 tool. However, it was ubiquitous in its heyday and will probably continue to be
 used for decades to come. It is used for managing network interfaces.
 
+Seeing as I don't want to torch my own network interfaces by monkeying around 
+too much with `ifconfig`, you're going to have to be content with a simple 
+report of the network interfaces.
+
+    # ifconfig -a
+    eth0      Link encap:Ethernet  HWaddr XX:XX:XX:XX:XX:XX
+              UP BROADCAST MULTICAST  MTU:1500  Metric:1
+              RX packets:0 errors:0 dropped:0 overruns:0 frame:0
+              TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
+              collisions:0 txqueuelen:1000 
+              RX bytes:0 (0.0 B)  TX bytes:0 (0.0 B)
+              Interrupt:20 Memory:fe200000-fe220000 
+    
+    lo        Link encap:Local Loopback  
+              inet addr:127.0.0.1  Mask:255.0.0.0
+              UP LOOPBACK RUNNING  MTU:65536  Metric:1
+              RX packets:3199 errors:0 dropped:0 overruns:0 frame:0
+              TX packets:3199 errors:0 dropped:0 overruns:0 carrier:0
+              collisions:0 txqueuelen:0 
+              RX bytes:641610 (626.5 KiB)  TX bytes:641610 (626.5 KiB)
+    
+    wlan0     Link encap:Ethernet  HWaddr XX:XX:XX:XX:XX:XX
+              inet addr:10.36.27.156  Bcast:10.36.255.255  Mask:255.255.0.0
+              UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+              RX packets:454778 errors:0 dropped:0 overruns:0 frame:0
+              TX packets:206803 errors:0 dropped:0 overruns:0 carrier:0
+              collisions:0 txqueuelen:1000 
+              RX bytes:159627762 (152.2 MiB)  TX bytes:36698701 (34.9 MiB)
+
+As you can see, at the time I completed this assignment, I was on a wireless 
+network. The `wlan0` wireless interface holds the details of the interface. 
+The address that was given to me by the TexasStateWPA wireless network was 
+10.36.27.156. I have redacted the hardware addresses (MAC addresses), as they 
+are intended to serve as unique identifiers for the specific hardware in my 
+system. The are several status words as well for the `wlan0` interface, such 
+as `UP` and `RUNNING`. Observe how, while the `eth0` interface is `UP`, it is 
+not currently `RUNNING`.
+
 netstat
 =======
 
-netstat is sort of like a swiss army knife of network statistics. It can 
+`netstat` is sort of like a swiss army knife of network statistics. It can 
 show connections, routing tables, interface statistics, and perform all sorts 
-of other fun networking tasks, like figuring out multicast memberships.
+of other fun networking tasks, like figuring out multicast memberships. I'll 
+show a few handy examples.
+
+### List all active network traffic on port 80:
+
+Options:
+
+  * -p : print the pid and name of program to which the socket belongs.
+  * -n : only show numeric addresses. Do not attempt to resolve. If you leave
+    this off, netstat will drop any line that it couldn't resolve. Seeing as
+every connection is local (10.\*.\*.\*.), you won't ever see anything.
+  * -t : Show only TCP sockets.
+  * grep ":80" : This filters the list that netstat spits out for connections
+that are speaking over port 80.
 
 
+    $ netstat -pnt | grep ":80"
+    (Not all processes could be identified, non-owned process info
+     will not be shown, you would have to be root to see it all.)
+    tcp        0      0 10.36.27.156:60494      23.35.171.27:80         ESTABLISHED 30923/firefox   
+    tcp        0      0 10.36.27.156:48358      108.160.163.100:80      ESTABLISHED 3951/dropbox    
+
+
+Notice how there are two processes with established connections on port 80, 
+firefox and dropbox. Firefox is a web-browser and dropbox is a file-sync 
+client.
+
+It is important to note that netstat only shows what sockets and ports are 
+being used at the moment it checks. Running the command again after not 
+using the firefox web-browser for a few minutes yields:
+
+    $ netstat -pnt | grep ":80"
+    (Not all processes could be identified, non-owned process info
+     will not be shown, you would have to be root to see it all.)
+    tcp        0      0 10.36.27.156:48358      108.160.163.100:80      ESTABLISHED 3951/dropbox    
+
+### List all listening sockets that have an associated pid:
+
+Options:
+
+  * -l : Show only listening sockets. That is, sockets that are actively
+    listening for incoming connections, even if no connection is actually
+established yet.
+  * grep -v "-" : Filters out results that are not associated with a PID or 
+process name.
+
+
+    $ netstat -plnt | grep -v "-"
+    (Not all processes could be identified, non-owned process info
+     will not be shown, you would have to be root to see it all.)
+    Active Internet connections (only servers)
+    tcp        0      0 127.0.0.1:60885         0.0.0.0:*               LISTEN      31015/cli       
+    tcp        0      0 0.0.0.0:17500           0.0.0.0:*               LISTEN      3951/dropbox    
+
+Notice how dropbox is always listening for connections. This is to be 
+expected; it is a file sync client that is always catching pings from remote 
+servers that keep track of changes for a given fileset across different 
+hosts. 
+
+`cli` is a part of the Mono project. It is Mono's ECMA-CLI native 
+code generator. Long story short, it tries to take applications written in 
+.NET, and spit out native code that GNU/Linux can understand. In this case, 
+it's keepass2, a password manager. The keepass2 binary is listening from 
+127.0.0.1 --localhost, the local machine-- on port 60885 for connections from 
+anywhere. Which actually sounds like a bad idea. And now I'm a little 
+paranoid. But looking at active connections, it seems like this is just 
+local network traffic between two sockets --namely, keepass2 and cli.
+
+    $ netstat -taucp | grep 31015
+    (Not all processes could be identified, non-owned process info
+     will not be shown, you would have to be root to see it all.)
+    tcp        0      0 localhost:60885         *:*                     LISTEN      31015/cli       
+    tcp        0      0 localhost:37270         localhost:60885         ESTABLISHED 31015/cli       
+    tcp        0      0 localhost:60885         localhost:37270         ESTABLISHED 31015/cli       
+
+Still. I don't think it should be listening to ANY connection. It should be 
+bound to localhost. I'll look into that later.
