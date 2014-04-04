@@ -42,32 +42,3 @@ set grid
 
 plot "export_datefix_140321144244.csv" using 5:4 with lines title "Cell Signal"
 
-# Old way of plotting.
-#plot "segregated-by-ssid/wifi-1001.csv" using 5:4 with lines title "1001", \
-#     "segregated-by-ssid/wifi-TexasStateWPA.csv" using 5:4 with lines title "TexasStateWPA", \
-#     "segregated-by-ssid/wifi-TexasStateUniversity.csv" using 5:4 with lines title "TexasStateUniversity",\
-#     "segregated-by-ssid/wifi-HP-Print-1B-Officejet-6700.csv" using 5:4 with lines title "A fucking printer"
-
-# Now apparently gnuplot has a fancy schmancy new way to iterate over lots of 
-# data files. Awesome!
-
-################################################################################
-
-# Everything
-#plot for [fn in system("ls segregated-by-ssid/ | grep wifi- ")] 'segregated-by-ssid/'.fn using 5:4 with linespoints title fn
-
-# Everything except the unknowns
-#plot for [fn in system("ls segregated-by-ssid/ | grep wifi- | grep -v unknown ")] 'segregated-by-ssid/'.fn using 5:4 with linespoints title fn
-
-# Just TexasState wireless
-#plot for [fn in system("ls segregated-by-ssid/ | grep wifi- | grep Texas ")] 'segregated-by-ssid/'.fn using 5:4 with linespoints title fn
-
-# Just the Unknowns
-#plot for [fn in system("ls segregated-by-ssid/ | grep wifi- | grep unknown ")] 'segregated-by-ssid/'.fn using 5:4 with linespoints title fn
-
-# Just the printers.
-#plot for [fn in system("ls segregated-by-ssid/ | grep wifi- | grep HP ")] 'segregated-by-ssid/'.fn using 5:4 with linespoints title fn
-
-# Just the Tram and other official texas state signals
-#plot for [fn in system("ls segregated-by-ssid/just-txstate-stuff/ ")] 'segregated-by-ssid/'.fn using 5:4 with linespoints title fn
-
