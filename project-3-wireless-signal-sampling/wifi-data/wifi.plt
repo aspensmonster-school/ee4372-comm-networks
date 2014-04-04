@@ -12,4 +12,6 @@ set title "RSSI of Various WiFi Networks Over Time"
 set xlabel "Time"
 set ylabel "RSSI (dBm)"
 set grid
-plot "wifi_140403220558.csv" using 5:6:4 with lines title $6
+
+plot "segregated-by-ssid/wifi-1001.csv" using 5:4 with lines title "1001", \
+     "segregated-by-ssid/lolwut.csv" using 5:4 with lines title "TexasStateWPA"
