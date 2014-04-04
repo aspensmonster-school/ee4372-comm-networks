@@ -13,3 +13,9 @@ chronologically. Juststupidthings.
 
 This will actually come in handy for my technical interview tomorrow for 
 that system administration gig. Talk about killing two birds with one stone.
+
+UPDATE:
+
+Oh look more one-liners. Grabbing the lat-long out of the data:
+
+    $ awk -F, '{print $2,$3;}' export_140321144244.csv > lat-long
