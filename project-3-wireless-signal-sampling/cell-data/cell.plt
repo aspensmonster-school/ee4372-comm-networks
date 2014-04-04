@@ -45,6 +45,11 @@ set pointsize 2
 
 # "pt 7" means Point Type 7, which is a filled circle.
 
+# RSSI
 plot "umts-points.csv" using 5:4 with points pt 7 title "UMTS  Signal",\
      "hspa-points.csv" using 5:4 with points pt 7 title "HSPA+ Signal",\
      "export_datefix_140321144244.csv" using 5:4 with lines lw 3 title "Cell Strength"
+
+# data rx/tx
+#plot "export_datefix_140321144244.csv" using 5:20 with linespoints title "Mobile Data Reception (bytes)",\
+#     "export_datefix_140321144244.csv" using 5:21 with linespoints title "Mobile Data Transmission (bytes)"
