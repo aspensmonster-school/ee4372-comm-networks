@@ -40,5 +40,11 @@ set ylabel "RSSI (dBm)"
 # turn on the grid so that it's easier to read the plot
 set grid
 
-plot "export_datefix_140321144244.csv" using 5:4 with lines title "Cell Signal"
+# increase point size so it's easier to see which signal type is which.
+set pointsize 2
 
+# "pt 7" means Point Type 7, which is a filled circle.
+
+plot "umts-points.csv" using 5:4 with points pt 7 title "UMTS  Signal",\
+     "hspa-points.csv" using 5:4 with points pt 7 title "HSPA+ Signal",\
+     "export_datefix_140321144244.csv" using 5:4 with lines lw 3 title "Cell Strength"
