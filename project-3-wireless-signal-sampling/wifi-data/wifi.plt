@@ -29,7 +29,7 @@ set format x "%M:%S"
 set xrange [ "21 March 2014 14:28:00":"21 March 2014 14:44:00" ]
 
 # set the plot title
-set title "RSSI of Various WiFi Networks Over Time"
+set title "RSSI of EVERYTHING"
 
 # x-axis label
 set xlabel "Time"
@@ -52,7 +52,7 @@ set grid
 ################################################################################
 
 # Everything
-#plot for [fn in system("ls segregated-by-ssid/ | grep wifi- ")] 'segregated-by-ssid/'.fn using 5:4 with linespoints title fn
+plot for [fn in system("ls segregated-by-ssid/ | grep wifi- ")] 'segregated-by-ssid/'.fn using 5:4 with linespoints title fn
 
 # Everything except the unknowns
 #plot for [fn in system("ls segregated-by-ssid/ | grep wifi- | grep -v unknown ")] 'segregated-by-ssid/'.fn using 5:4 with linespoints title fn
@@ -67,5 +67,5 @@ set grid
 #plot for [fn in system("ls segregated-by-ssid/ | grep wifi- | grep HP ")] 'segregated-by-ssid/'.fn using 5:4 with linespoints title fn
 
 # Just the Tram and other official texas state signals
-plot for [fn in system("ls segregated-by-ssid/just-txstate-stuff/ ")] 'segregated-by-ssid/'.fn using 5:4 with linespoints title fn
+#plot for [fn in system("ls segregated-by-ssid/just-txstate-stuff/ ")] 'segregated-by-ssid/'.fn using 5:4 with linespoints title fn
 
