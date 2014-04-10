@@ -1,0 +1,91 @@
+
+%% stripped down version of "bare_jrnl.tex" for use in Casey's Circuits I class.
+%% Original version has very good comments for use. You should check it out at
+%% http://www.ieee.org/publications_standards/publications/authors/authors_journals.html
+%% I run GNU/Linux so I downloaded the "Unix LaTeX2e Transactions Style File" package
+%% and based my work off of the sample tex file named "bare_jrnl.tex".
+
+% original author info below (this guy's a rockstar for making his comments so easy to use :P)
+%% 2007/01/11
+%% by Michael Shell
+%% see http://www.michaelshell.org/
+%% for current contact information.
+
+\documentclass[journal,twocolumn]{IEEEtran}
+% make sure "IEEEtran.cls" is in the path of the tex file you are working on
+
+%graphics package for adding images
+\ifCLASSINFOpdf
+  \usepackage[pdftex]{graphicx}
+\else
+   \usepackage[dvips]{graphicx}
+\fi
+
+%math package for math equations
+\usepackage[cmex10]{amsmath}
+
+%float package for putting images where I fucking tell them to go
+\usepackage{float}
+
+%for sourcecode
+\usepackage{listings}
+\lstset{breaklines=true,language=gnuplot,basicstyle=\scriptsize,showspaces=false,showstringspaces=false}
+
+%For hyperlinks
+\usepackage{hyperref}
+
+\begin{document}
+
+% paper title
+% can use linebreaks \\ within to get better formatting as desired
+\title{Project 3: Collection and Analysis of Wireless Signals}
+\author{Preston~Maness}
+
+% header
+\markboth{Texas State University, Dr. Hudson, EE4372, Spring 2014}%
+{}
+
+% make the title area
+\maketitle
+
+% Give the abstract of your lab here
+\begin{abstract}
+A route around campus was taken on foot in order to sample cell phone, GPS, 
+and WiFi signals. An Android smartphone with the RF Signal Tracker 
+app was used to sample and store the various data associated with each type 
+of wireless signal. Analysis was then performed on signal strength over 
+time and location for each type of signal. Additionally, wireless network
+SSID and BSSID characteristics were correlated against location on the 
+Texas State University San Marcos campus.
+
+\end{abstract}
+
+% Split your lab report into sections by calling \section{Section name}
+\section{Introduction}
+\IEEEPARstart{T}{his} project... 
+
+%\begin{figure}[h!]
+%\centering
+%\includegraphics[scale=.35]{schematic.png}
+%\label{fig_schem}
+%\end{figure}
+
+\section{Another section...}
+
+blah blah blah...
+
+\begin{tabular}{|c|c|c|c|}
+\hline
+Value & Expected & Measured & \% error \\
+\hline
+$\omega_{o}$ (Hz) & 440 & NA & NA\\
+\hline
+phase (deg) & 45 & NA & NA\\
+\hline
+\end{tabular}
+
+\section{Conclusion}
+
+blah blah blah.
+
+\end{document}
