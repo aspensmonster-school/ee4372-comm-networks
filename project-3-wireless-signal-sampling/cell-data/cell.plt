@@ -29,7 +29,8 @@ set format x "%M:%S"
 set xrange [ "21 March 2014 14:28:00":"21 March 2014 14:44:00" ]
 
 # set the plot title
-set title "RSSI of Cell Phone Network Over Time"
+#set title "RSSI of Cell Phone Network Over Time"
+set title "Mobile Data Transfer Over Time"
 
 # x-axis label
 set xlabel "Time"

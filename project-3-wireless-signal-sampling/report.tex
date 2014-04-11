@@ -74,7 +74,13 @@ and store the results in a CSV file. Analysis was then performed on the data.
 
 The route is detailed in figure~\ref{fig_path} as the red line over the Google
 Maps Satellite image. The path started at the RFM building, and ended at the
-commuter parking lot near the soccer fields.
+commuter parking lot near the soccer fields. The entire path was walked at 
+approximately the same speed, with only one stop for a traffic light. \emph{
+Due to this fact, the relationship between time and location is relatively 
+linear with only minor phase shifts.} Given this relationship, the data in 
+this report is plotted against time, with the understanding that the position 
+of the sampler when $x$ percent of the data has been plotted roughly 
+corresponds to $x$ percent of the path having been travelled.
 
 \begin{figure*}
 \begin{center}
@@ -111,7 +117,32 @@ gnuplot scripts (the scripts may also be found in Appendix A of this report).
 
 \section{Cellular Data Analysis}
 
-Interior crocodile alligator. I drive a chevrolet movie theatre.
+The Received Signal Strength Indication (RSSI, units dBm) of the cellular 
+signal was plotted over time, as was the class of signal (regular 2G vs data 
+3G/4G). The results can be found in figure~\ref{fig_cell_1}. It can be seen 
+that the signal strength correlates with the presence of buildings: the more 
+buildings there are, the lower the signal strength tends to be.
+
+\begin{figure*}
+\begin{center}
+\includegraphics[scale=0.3]{cell-data/cell.png}
+\caption{RSSI of Cellular Signal Over Time}
+\label{fig_cell_1}
+\end{center}
+\end{figure*}
+
+As well, mobile data transfer over time was also plotted in
+figure~\ref{fig_cell_2}. In particular, take note that mobile data transfer
+only occured when there was an HSPA+ (3G/4G) signal to the cellular handset.
+Throughput of the data connection was not investigated for this report.
+
+\begin{figure*}
+\begin{center}
+\includegraphics[scale=0.3]{cell-data/cell-2.png}
+\caption{Mobile Data Transfer Over Time}
+\label{fig_cell_2}
+\end{center}
+\end{figure*}
 
 \section{WiFi Data Analysis}
 
