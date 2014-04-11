@@ -49,7 +49,7 @@ set grid
 # Now apparently gnuplot has a fancy schmancy new way to iterate over lots of 
 # data files. Awesome!
 
-################################################################################
+#################################
 
 # Everything
 plot for [fn in system("ls segregated-by-ssid/ | grep wifi- ")] 'segregated-by-ssid/'.fn using 5:4 with linespoints title fn

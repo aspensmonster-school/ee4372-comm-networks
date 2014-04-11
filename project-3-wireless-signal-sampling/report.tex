@@ -30,9 +30,19 @@
 %center captions under their images/figures
 \usepackage{caption}
 
+%for background color for listings
+\usepackage{color}
+\definecolor{light-gray}{gray}{0.95}
+
 %for sourcecode
 \usepackage{listings}
-\lstset{breaklines=true,language=gnuplot,basicstyle=\scriptsize,showspaces=false,showstringspaces=false}
+\lstset{breaklines=true,
+language=gnuplot,
+basicstyle=\scriptsize,
+showspaces=false,
+showstringspaces=false,
+frame=single,
+backgroundcolor=\color{light-gray}}
 
 %For hyperlinks
 \usepackage{hyperref}
@@ -113,7 +123,12 @@ this glitch.
 Numerous gnuplot scripts were utilized to plot this data in different ways. 
 Along the way, various ``helper'' CSVs were generated to ease plotting with 
 gnuplot. These helper CSVs may all be found in the repository, as can  the 
-gnuplot scripts (the scripts may also be found in Appendix A of this report).
+gnuplot scripts. The main url for the repository is below:
+
+\begin{itemize}
+\item
+\url{https://github.com/aggroskater/ee4372-comm-networks/tree/master/project-3-wireless-signal-sampling}
+\end{itemize}
 
 \section{Cellular Data Analysis}
 
@@ -144,21 +159,83 @@ Throughput of the data connection was not investigated for this report.
 \end{center}
 \end{figure*}
 
+The code for these plots can be found in the repo mentioned in the Data 
+section of this report.
+
 \section{WiFi Data Analysis}
 
 Much analysis. Many data. So plot. Wow.
+
+\begin{figure*}
+\begin{center}
+\includegraphics[scale=0.3]{wifi-data/001-everything.png}
+\caption{ALL WiFi SSIDs}
+\label{fig_wifi_1}
+\end{center}
+\end{figure*}
+
+\begin{figure*}
+\begin{center}
+\includegraphics[scale=0.3]{wifi-data/002-all-but-unknowns.png}
+\caption{All WiFi SSIDs Except Unknowns}
+\label{fig_wifi_2}
+\end{center}
+\end{figure*}
+
+\begin{figure*}
+\begin{center}
+\includegraphics[scale=0.3]{wifi-data/003-texas-state-wireless.png}
+\caption{Texas State Wireless Network (TexasStateWPA and TexasStateUniversity)}
+\label{fig_wifi_3}
+\end{center}
+\end{figure*}
+
+\begin{figure*}
+\begin{center}
+\includegraphics[scale=0.3]{wifi-data/004-official-txstate.png}
+\caption{All ``official'' Texas State Wireless SSIDs}
+\label{fig_wifi_4}
+\end{center}
+\end{figure*}
+
+\begin{figure*}
+\begin{center}
+\includegraphics[scale=0.3]{wifi-data/005-printers.png}
+\caption{WiFi Printing Devices}
+\label{fig_wifi_5}
+\end{center}
+\end{figure*}
+
+\begin{figure*}
+\begin{center}
+\includegraphics[scale=0.3]{wifi-data/006-unknowns.png}
+\caption{WiFi Signals With No SSID (Unknowns)}
+\label{fig_wifi_6}
+\end{center}
+\end{figure*}
 
 \section{Conclusion}
 
 Lol conclusions are cool.
 
-\appendix[Gnuplot Scripts]
+%\appendix[Gnuplot Scripts]
 
-This appendix holds numerous gnuplot scripts utilized in the 
-generation of the plots found in this report.
+%This appendix holds numerous gnuplot scripts utilized in the 
+%generation of the plots found in this report. Comments were used 
+%to run different instances of the plot with different data by 
+%commenting out every line that was not to be plotted for any 
+%given run (hacky, sure, but I've got five other classes to deal 
+%with). This code can be found in a more digitally accesible manner 
+%at the github repo located at \url{https://github.com/aggroskater/ee4372-comm-networks/tree/master/project-3-wireless-signal-sampling}.
 
-\begin{lstlisting}
-asdf
-\end{lstlisting}
+%\lstinputlisting[
+%caption={Cellular Data Plotting},
+%label={lst-cell} 
+%]{cell-data/cell.plt}
+
+%\lstinputlisting[
+%caption={WiFi Data Plotting},
+%label={lst-wifi}
+%]{wifi-data/wifi.plt}
 
 \end{document}
