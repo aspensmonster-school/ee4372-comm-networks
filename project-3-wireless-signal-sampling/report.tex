@@ -27,6 +27,9 @@
 %float package for putting images where I fucking tell them to go
 \usepackage{float}
 
+%center captions under their images/figures
+\usepackage{caption}
+
 %for sourcecode
 \usepackage{listings}
 \lstset{breaklines=true,language=gnuplot,basicstyle=\scriptsize,showspaces=false,showstringspaces=false}
@@ -61,31 +64,70 @@ Texas State University San Marcos campus.
 \end{abstract}
 
 % Split your lab report into sections by calling \section{Section name}
-\section{Introduction}
-\IEEEPARstart{T}{his} project... 
+\section{Sampling Methodology and Route}
+\IEEEPARstart{T}{his} project makes use of an app titled ``RF Signal Tracker'' 
+by developer Ken Hunt in the Google Play app store for Android smart phones. 
+The particular device utilized was a Samsung Galaxy S Relay 4G, model string 
+SGH-T699. A path was walked around campus, with this device running this app,
+to sample cellular signals, GPS signals, and WiFi signals at regular intervals
+and store the results in a CSV file. Analysis was then performed on the data.
 
-%\begin{figure}[h!]
-%\centering
-%\includegraphics[scale=.35]{schematic.png}
-%\label{fig_schem}
-%\end{figure}
+The route is detailed in figure~\ref{fig_path} as the red line over the Google
+Maps Satellite image. The path started at the RFM building, and ended at the
+commuter parking lot near the soccer fields.
 
-\section{Another section...}
+\begin{figure*}
+\begin{center}
+\includegraphics[scale=0.4]{path-data/Path-Taken-Starting-At-Mitte.png}
+\caption{Path Taken Around Campus}
+\label{fig_path}
+\end{center}
+\end{figure*}
 
-blah blah blah...
+\section{Data}
 
-\begin{tabular}{|c|c|c|c|}
-\hline
-Value & Expected & Measured & \% error \\
-\hline
-$\omega_{o}$ (Hz) & 440 & NA & NA\\
-\hline
-phase (deg) & 45 & NA & NA\\
-\hline
-\end{tabular}
+The data is kept in two principal csv files on a git repository located at 
+the following URLs:
+
+\begin{itemize}
+\item
+Cell and GPS data: \url{https://raw.githubusercontent.com/aggroskater/ee4372-comm-networks/master/project-3-wireless-signal-sampling/cell-data/export_140321144244.csv}
+\item
+WiFi data: \url{https://raw.githubusercontent.com/aggroskater/ee4372-comm-networks/master/project-3-wireless-signal-sampling/wifi-data/wifi_140403220558.csv}
+\end{itemize}
+
+The data collected Cell and GPS data every 5 to 6 seconds, and WiFi data every 
+7 or 8 seconds. It is important to note that it appears as if the sampling 
+software was unable to keep up with the polling requests for at least the 
+first minute for the WiFi data. There are multiple sets of WiFi data that have
+the same timestamp, but different GPS coordinates during this first minute. The
+overal trends gleaned from the data, however, do not suffer unnecessarily from
+this glitch.
+
+Numerous gnuplot scripts were utilized to plot this data in different ways. 
+Along the way, various ``helper'' CSVs were generated to ease plotting with 
+gnuplot. These helper CSVs may all be found in the repository, as can  the 
+gnuplot scripts (the scripts may also be found in Appendix A of this report).
+
+\section{Cellular Data Analysis}
+
+Interior crocodile alligator. I drive a chevrolet movie theatre.
+
+\section{WiFi Data Analysis}
+
+Much analysis. Many data. So plot. Wow.
 
 \section{Conclusion}
 
-blah blah blah.
+Lol conclusions are cool.
+
+\appendix[Gnuplot Scripts]
+
+This appendix holds numerous gnuplot scripts utilized in the 
+generation of the plots found in this report.
+
+\begin{lstlisting}
+asdf
+\end{lstlisting}
 
 \end{document}
