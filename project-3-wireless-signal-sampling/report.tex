@@ -29,7 +29,13 @@
 
 %for putting all figures at the end of the document (useful when 
 %they are large and unwieldy)
+%
+%The renewcommand tells endfloat to put as many floats on a page 
+%as possible, rather than a single float per page.
+%Solution found at: ftp://ctan.tug.org/tex-archive/macros/latex/contrib/endfloat/endfloat.pdf 
+%section 7 titled ``Several floats per page''
 \usepackage[nomarkers]{endfloat}
+\renewcommand{\efloatseparator}{\mbox{}}
 
 %center captions under their images/figures
 \usepackage{caption}
