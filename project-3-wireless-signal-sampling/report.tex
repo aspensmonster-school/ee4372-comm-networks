@@ -27,6 +27,10 @@
 %float package for putting images where I fucking tell them to go
 \usepackage{float}
 
+%for putting all figures at the end of the document (useful when 
+%they are large and unwieldy)
+\usepackage[nomarkers]{endfloat}
+
 %center captions under their images/figures
 \usepackage{caption}
 
@@ -164,7 +168,13 @@ section of this report.
 
 \section{WiFi Data Analysis}
 
-Much analysis. Many data. So plot. Wow.
+A first impression of the WiFi data leads to the conclusion that the 
+WiFi spectrum is quite crowded around Texas State. Figure~\ref{fig_wifi_1}
+showcases over 100 unique SSIDs that were sampled on the route. 65 of these 
+were ``unknown'' signals that were broadcasting a BSSID on the WiFi spectrum, 
+but did not supply SSIDs. It is suspected that these were WiFi signals 
+from personal devices such as mobile phones and laptops that were not acting 
+as access points.
 
 \begin{figure*}
 \begin{center}
@@ -174,6 +184,20 @@ Much analysis. Many data. So plot. Wow.
 \end{center}
 \end{figure*}
 
+Eliminating the unknowns from the plot, as in Figure~\ref{fig_wifi_2}, still
+shows a relatively crowded spectrum, but more trends are evident without the
+noise of the uknowns. The solid blue triangle line in particular is the
+``TexasStateWPA'' SSID that most students, faculty, and other staff utilize to
+connect to the Texas State network. Between the 30 minute and 32 minute marks,
+there is relatively little SSID detection. This corresponds to the walk away
+from RFM, over the bridge, and toward the main campus. From the 32 minute to 
+37 minute marks, there is more SSID detection that corresponds with the 
+Nursing and Student Center buildings, followed by several dorm rooms. From the
+37 minute to 39 minute mark, the walk along Sessom Drive toward the Rec center
+has lower SSID detection. Upon walking along the Rec Center and toward the 
+athletic dorms, SSID detection rises again until the sampler reaches the 
+parking lot.
+
 \begin{figure*}
 \begin{center}
 \includegraphics[scale=0.3]{wifi-data/002-all-but-unknowns.png}
@@ -181,6 +205,14 @@ Much analysis. Many data. So plot. Wow.
 \label{fig_wifi_2}
 \end{center}
 \end{figure*}
+
+The TexasStateWPA and TexasStateUniversity networks are plotted in 
+Figure~\ref{fig_wifi_3}. Not revealed by the plot, however, is that this 
+WiFi network is supplied by numerous independent devices. As the sampler 
+walks out of range of one access point, the connection gets handed off to 
+another access point. This is evident in the logs, as the SSID stays the 
+same --TexasStateWPA-- while the BSSID that identifies the unique hardware 
+supply the SSID changes.
 
 \begin{figure*}
 \begin{center}
@@ -190,6 +222,14 @@ Much analysis. Many data. So plot. Wow.
 \end{center}
 \end{figure*}
 
+Figure~\ref{fig_wifi_4} is provided to illustrate the presence of two other 
+``official'' Texas State wireless SSIDs. The ``Comanche at Student Center'' 
+SSID is found near the student center between the 33 and 35 minute marks. 
+During this particular segment of the path, the SSID of a Bobcat Tram 
+was also briefly detected (two samples): ``BobcatTram7''. It is suspected that
+this signal was associated with a moving Bobcat Tram as it either arrived or 
+departed from the Student Center pick-up/drop-off zone.
+
 \begin{figure*}
 \begin{center}
 \includegraphics[scale=0.3]{wifi-data/004-official-txstate.png}
@@ -198,6 +238,15 @@ Much analysis. Many data. So plot. Wow.
 \end{center}
 \end{figure*}
 
+Figure~\ref{fig_wifi_5} shows the signal strength of various SSIDs associated 
+with HP printing devices. Three distinct clusters are evident. The first is 
+around the 29 minute mark. Numerous HP printing devices are detected and are 
+likely originated in the RFM building. Crossing the bridge, many more printing 
+devices are detected, presumably from the Nursing and Student Center buildings 
+as well as the nearby dorm rooms. These types of SSIDs drop off afterward 
+until the sampler nears the athletic dorms near the rec center and commuter 
+parking lot, where some brief SSID detection again occurs.
+
 \begin{figure*}
 \begin{center}
 \includegraphics[scale=0.3]{wifi-data/005-printers.png}
@@ -205,6 +254,10 @@ Much analysis. Many data. So plot. Wow.
 \label{fig_wifi_5}
 \end{center}
 \end{figure*}
+
+Finally, Figure~\ref{fig_wifi_6} plots the unknown WiFi signals by themselves. 
+They appear to occur relatively uniformly throughout the sampling path. It is 
+suspected that these correspond to WiFi clients, rather than access points.
 
 \begin{figure*}
 \begin{center}
