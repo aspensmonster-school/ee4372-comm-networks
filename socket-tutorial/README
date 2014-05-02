@@ -7,6 +7,8 @@ Compile with:
 gcc tcpclient.c -o tcpclient
 gcc tcpserver.c -o tcpserver
 
+-------------
+
 Example Usage:
 
 You'll want two different terminals up and running for this to see what's
