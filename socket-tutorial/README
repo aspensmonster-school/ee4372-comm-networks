@@ -1,0 +1,8 @@
+Code adopted from
+
+"TCP/IP Sockets in C; Practical Guide for Programmers"
+
+Compile with:
+
+gcc tcpclient.c -o tcpclient
+gcc tcpserver.c -o tcpserver
