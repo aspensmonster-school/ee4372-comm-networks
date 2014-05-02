@@ -6,3 +6,51 @@ Compile with:
 
 gcc tcpclient.c -o tcpclient
 gcc tcpserver.c -o tcpserver
+
+Example Usage:
+
+You'll want two different terminals up and running for this to see what's
+going on.
+
+In the first terminal, run:
+
+$ ./tcpserver 9001
+
+The number isn't special. Any number from 1 to 65535 should work (I think),
+but different operating systems might not let regular users bind to some of
+the lower ports. Hence my usage of port 9001.
+
+In the second terminal, you can run something like this:
+
+$ ./tcpclient 127.0.0.1 "some string" 9001 
+
+Notice that we're using the loop-back address 127.0.0.1. Technically, the
+server doesn't bind to this particular IP address --I don't think anyway.
+I believe it binds to 0.0.0.0, or in other words, it listens on all available
+interfaces on that port. I'm not an expert on all the details.
+
+In any case, the tcpclient will send "some string" to the 127.0.0.1
+IP address on port 9001.
+
+-------------
+
+Once you enter the command in the second terminal, you should see this as
+output for each terminal...
+
+Terminal one:
+
+$ ./tcpclient 127.0.0.1 "some string" 9001
+Received: some string
+$
+
+Terminal two:
+$ ./tcpserver 9001
+Handling client 127.0.0.1
+
+------------
+
+It is important to note that the tcpclient program exits, while the tcpserver
+program continues to run until you end it ("Ctrl+C" in the terminal running
+the server).
+
+This should serve as a good baseline for the project.
